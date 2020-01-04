@@ -1,1 +1,23 @@
-<p>task1 works!</p>
+<h3>Двоичные деревья поиска</h3>
+<label>Введите число:</label>
+<input type="number" [formControl]="itemControl"/>
+<button [disabled]="itemControl.invalid" (click)="add(itemControl.value)">Добавить</button>
+<button [disabled]="itemControl.invalid" (click)="remove(itemControl.value)">Удалить</button>
+<button [disabled]="itemControl.invalid" (click)="find(itemControl.value)">Найти</button>
+
+
+<h4>Симметричный обход</h4>
+<ng-template [ngTemplateOutlet]="node"
+             [ngTemplateOutletContext]="{$implicit: item}"
+             *ngFor="let item of symmetric">
+</ng-template>
+<hr>
+<h4>Обратно-симметричный обход</h4>
+<ng-template [ngTemplateOutlet]="node"
+             [ngTemplateOutletContext]="{$implicit: item}"
+             *ngFor="let item of inverseSymmetric">
+</ng-template>
+
+<ng-template #node let-data>
+  <div [style.marginLeft.px]="data.depth*30">{{data.value}}</div>
+</ng-template>

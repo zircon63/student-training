@@ -1,0 +1,15 @@
+nav {
+  display: flex;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+  display: flex;
+  margin: 1rem;
+
+  &.active {
+    color: darkblue;
+    font-weight: bold;
+  }
+}
