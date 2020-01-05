@@ -1,25 +1,38 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HashTable } from './shared/hash-table';
 
-import { Task2Component } from './task2.component';
-
-describe('Task2Component', () => {
-  let component: Task2Component;
-  let fixture: ComponentFixture<Task2Component>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ Task2Component ]
-    })
-    .compileComponents();
-  }));
+describe('HashTable', () => {
+  let hashTable: HashTable<string>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(Task2Component);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    hashTable = new HashTable<string>(11, item => item
+      .split('')
+      .reduce((total, char, index) => {
+        total += item.charCodeAt(index);
+        return total;
+      }, 0));
+    const name = ['Alex', 'John', 'Max', 'Micky', 'Susan', 'Hose', 'Anna', 'Kristi', 'Poly', 'Fred'];
+    new Array(10)
+      .fill(0)
+      .map((_, i) => name[i])
+      .forEach(item => hashTable.add(item));
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('Добавление', () => {
+    expect(function() {
+      hashTable.add('X');
+    }).not.toThrow(new Error('Нет свободных ячеек'));
+  });
+
+  it('Поиск', () => {
+    hashTable.add('X');
+    const item = hashTable.find('X');
+    expect(item.value).toEqual(true);
+  });
+
+  it('Нет свободных ячеек', () => {
+    hashTable.add('Y');
+    expect(function() {
+      hashTable.add('X');
+    }).toThrow(new Error('Нет свободных ячеек'));
   });
 });

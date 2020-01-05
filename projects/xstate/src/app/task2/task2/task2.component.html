@@ -1,1 +1,28 @@
-<p>task2 works!</p>
+<h3>Организация поиска в массиве данных при помощи специальных методов поиска.</h3>
+<label>Введите строку:</label>
+<input type="text" [formControl]="itemControl"/>
+<button (click)="generateName()">Сгенерировать Фамилию</button>
+<button [disabled]="itemControl.invalid" (click)="set(itemControl.value)">Добавить</button>
+<button [disabled]="itemControl.invalid" (click)="find(itemControl.value)">Найти</button>
+<app-hash-table [hashTable]="hashTable"></app-hash-table>
+<hr>
+<h3>Проверка соотношения</h3>
+<button (click)="generateKeys()">Генерация исходных ключей</button>
+<p>Исходные ключи: {{keys}}</p>
+<button (click)="hashKeys()" [disabled]="keys.length === 0">Захэшировать ключи и рассчитать суммарное сравнение</button>
+<app-hash-table [hashTable]="tables['11']"></app-hash-table>
+<app-hash-table [hashTable]="tables['13']"></app-hash-table>
+<app-hash-table [hashTable]="tables['17']"></app-hash-table>
+<h3>Результат</h3>
+<table border cellpadding="10">
+  <tr>
+    <td>№</td>
+    <td>Добавление</td>
+    <td>Поиск</td>
+  </tr>
+  <tr *ngFor="let item of stats">
+    <td>{{item.number}}</td>
+    <td>{{item.add}}</td>
+    <td>{{item.find}}</td>
+  </tr>
+</table>
