@@ -1,1 +1,37 @@
-<p>task3 works!</p>
+<h3>Сортировка данных</h3>
+<form [formGroup]="form">
+  <label>Количество элементов</label>
+  <input type="number" formControlName="count">
+  <label>Минимальное значение</label>
+  <input type="number" formControlName="min">
+  <label>Максимальное значение</label>
+  <input type="number" formControlName="max">
+  <label>Тип сортировки</label>
+  <select formControlName="sort" multiple>
+    <option value="bubble">Пузырьком</option>
+    <option value="insert">Вставками</option>
+    <option value="quick">Быстрая</option>
+  </select>
+  <button (click)="generateArray()" [disabled]="form.invalid">Генерация массива чисел и сортировка</button>
+</form>
+<h4>Сгенерированный массив</h4>
+<div class="result">
+  {{array}}
+</div>
+<h4>Отсортированный массив</h4>
+<div class="result">
+  {{sortedArray}}
+</div>
+<h3>Анализ</h3>
+<table border cellpadding="10">
+  <tr>
+    <td>Метод сортировки</td>
+    <td>Сравнения</td>
+    <td>Перестановки</td>
+  </tr>
+  <tr *ngFor="let item of stats">
+    <td>{{item.name}}</td>
+    <td>{{item.compare}}</td>
+    <td>{{item.swap}}</td>
+  </tr>
+</table>
